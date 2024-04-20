@@ -1,7 +1,8 @@
+
 .landing-page {
   display: flex;
-  background-color: #ffb08e;
-  min-height: 100vh; /* Use min-height to ensure the container at least fills the viewport */
+    /*background-color: #ffb08e;*/
+    min-height: 100vh; /* Use min-height to ensure the container at least fills the viewport */
   width: 100%;
   padding: 20px; /* Adjusted padding */
   box-sizing: border-box; /* Include padding and border in the total width and height */
@@ -53,7 +54,7 @@
   left: 0;
   width: 100%;
   height: 20px;
-  background-image: linear-gradient(to left, #FFB08E, #FFD3B5, #FF8C66);
+  background-image: linear-gradient(to right, #FFB08E, #FF8C66);
 }
 
 .mind {
@@ -77,11 +78,11 @@
 
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
-  font-weight: 600; /* Set font weight to light */
+  font-weight: 400; /* Set font weight to light */
   text-align: justify; /* Justify text alignment */
   line-height: 1.5;
   letter-spacing: 0.03em; /* Set line height for better readability *//* Stretch letters */
-  margin-top: 10px; /* Add some margin at the top */
+  margin-top: 100px; /* Add some margin at the top */
   color: #fff; 
 }
 
@@ -89,6 +90,7 @@
   position: absolute;
   right: 0; /* Position on the far right */
   bottom: 0;
+  font-weight: 600;
 }
 
 .action-button {
@@ -105,12 +107,13 @@
   border-radius: 6px;
   width: fit-content;
   transition: background-color 1s ease, color 1s ease;
-  margin-top: 20px; /* Adjust the margin as needed */
+  margin-top: 10px; /* Adjust the margin as needed */
+  margin-bottom: 10px; /* Adjust the margin as needed */
 }
 
 .action-button:hover {
   background-color: #fff;
-  color: #ffb08e;
+  color: #b19cd9;
 }
 .logo-container {
   position: relative; /* Position the container relative to the parent */

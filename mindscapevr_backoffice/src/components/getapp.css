@@ -1,0 +1,200 @@
+
+.landing-page {
+    display: flex;
+    /*background-color: #ffb08e;*/
+    min-height: 100vh; /* Use min-height to ensure the container at least fills the viewport */
+    width: 100%;
+    padding: 20px; /* Adjusted padding */
+    box-sizing: border-box; /* Include padding and border in the total width and height */
+  }
+  
+  .left-half,
+  .right-half {
+    flex: 1; /* Each half takes up equal space */
+    padding: 10px; /* Add padding to the halves */
+  }
+  .right-half {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  .left-half {
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+  
+  }
+  
+  .title {
+    font-family: 'Montserrat', sans-serif; /* Use Montserrat font family */
+    font-size: 54px;
+    font-weight: 500; 
+    margin-bottom: 10px;
+    text-align: justify; /* Justify text alignment */
+    text-align-last: justify; /* Set font style to italic */
+  }
+  
+  .white-text {
+    color: #fff; /* Set color to white */
+  }
+  
+  .blue-text {
+    color: #b19cd9; /* Set color to #B19CD9 */
+    font-style: italic;
+    position: relative; /* Position the element relative */
+    display: inline-block;
+    z-index: 10;
+  
+  }
+  .underline {
+    position: absolute;
+    z-index: -1; /* Set z-index to a value lower than the text */
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: linear-gradient(to right, #FFB08E, #FF8C66);
+  }
+  
+  .mind {
+    color: #b19cd9;
+  }
+  
+  .description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 300; /* Set font weight to light */
+    text-align: justify; /* Justify text alignment */
+    text-align-last: justify; /* Justify the last line */
+    line-height: 1.5;
+    letter-spacing: 0.03em; /* Set line height for better readability *//* Stretch letters */
+    margin-top: 30px; /* Add some margin at the top */
+    color: #fff; 
+  }
+  
+  .quote {
+    position: relative;
+  
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400; /* Set font weight to light */
+    text-align: justify; /* Justify text alignment */
+    line-height: 1.5;
+    letter-spacing: 0.03em; /* Set line height for better readability *//* Stretch letters */
+    margin-top: 100px; /* Add some margin at the top */
+    color: #fff; 
+  }
+  
+  .author {
+    position: absolute;
+    right: 0; /* Position on the far right */
+    bottom: 0;
+    font-weight: 600;
+  }
+  
+  .action-button {
+    display: inline-flex; /* Use inline-flex to make the button take only the necessary width */
+    align-items: center;
+    background-color: #ffb08e;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 6px;
+    width: fit-content;
+    transition: background-color 1s ease, color 1s ease;
+    margin-top: 10px; /* Adjust the margin as needed */
+    margin-bottom: 10px; /* Adjust the margin as needed */
+  }
+  
+  .action-button:hover {
+    background-color: #fff;
+    color: #b19cd9;
+  }
+  .logo-container {
+    position: relative; /* Position the container relative to the parent */
+    width: 600px; /* Adjust the width of the container */
+    height: 600px; /* Adjust the height of the container */
+    margin-top: 80px; /* Adjust the top margin */
+  }
+  
+  .logo-big {
+    display: block;
+    width: 100%; /* Ensure the image fills the container */
+    height: 100%; /* Ensure the image fills the container */
+  }
+  .phone1 {
+    width: 320px;
+    height: auto;
+    margin-left: 70px;
+  }
+  .phone-container {
+    position: relative;
+    width: 200px; /* Adjust the container width */
+    height: 400px; 
+    display: inline-block;
+    margin-top: -550px;
+    margin-left: -300px;
+    /* Adjust the container height */
+ /* Adjust the top margin */
+  }
+
+  
+  .phone-img {
+    width: 280px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+  }
+
+  .phone-img1 {
+    width: 320px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    margin-left: 70px;
+  }
+  .phone-img2 {
+    width: 280px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -120px;
+    transform: translate(-50%, -50%) rotate(-10deg); /* Rotate the image by 10 degrees around its center */
+    transform-origin: center; 
+  }
+  
+  .phone2 {
+    margin-left: -120px;
+    transform: translate(-50%, -50%) rotate(-10deg); /* Rotate the image by 10 degrees around its center */
+  transform-origin: center;  /* Rotate the image by 10 degrees */
+   /* Set the rotation origin to the center of the image */ /* Adjust the margin to position it slightly to the left */
+  }
+   
+  
+  
+  
+  .store-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .store-icon {
+    width: 250px;
+    height: auto;
+    margin: 0 10px;
+  }  

@@ -15,8 +15,8 @@ const LandingPage = () => {
         <p className="description">
           We’ve trained a model called Mindscapevr which interacts in a therapeutic conversational way. Mindscapevr will answer and help you through various mental health questions, offering meditational guidance and fruitful clearance of <span class="mind">mind</span>.
         </p>
-        <p className="quote">“If you hear a voice within you saying 'you cannot paint,' then by all means paint and that voice will be silenced.” <span className="author">- Vincent van Gogh</span></p>
         <button className="action-button">Try MindscapeVR <span class="material-symbols-outlined">Robot_2</span></button>
+        <p className="quote">“If you hear a voice within you saying 'you cannot paint,' then by all means paint and that voice will be silenced.” <span className="author">- Vincent van Gogh</span></p>
 
       </div>
       <div className="right-half">
