@@ -96,7 +96,7 @@
 .action-button {
   display: inline-flex; /* Use inline-flex to make the button take only the necessary width */
   align-items: center;
-  background-color: #ffb08e;
+  background-color: transparent;
   border: 1px solid #fff;
   color: #fff;
   font-size: 16px;

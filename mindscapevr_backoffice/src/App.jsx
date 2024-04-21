@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import LandingPage from './components/landingpage';
 import Navbar from './components/navbar';
 import GetApp from './components/getapp';
-
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'; // Import components
+import Register from './components/signup'; // Import your Register component
+import Home from './homes/home'; // Import the wrapper component
+import Login from './components/signin'; // Import your Login component
+import Dashy from './homes/dash'; // Import your Dashboard component
 function App() {
   const [count, setCount] = useState(0)
   const [bgColor, setBgColor] = useState('#ffb08e');
+  //const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,13 +31,16 @@ function App() {
     };
   }, []);
   return (
+    <BrowserRouter>
     <div className="App" style={{ backgroundColor: bgColor, transition: 'background-color 2s ease' }}>
-      <Navbar bgColor={bgColor} />
-      
-    <LandingPage />
-    <GetApp />
-
+      <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashy />} />
+      </Routes>
   </div>
+  </BrowserRouter>
   )
 }
 

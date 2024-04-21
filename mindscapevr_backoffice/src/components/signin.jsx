@@ -1,53 +1,32 @@
 import React, { useState } from "react";
-import "./signup.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import "./signin.css"; // Make sure to import the correct CSS file
+import { Link } from 'react-router-dom';
 
-function Signup() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+import together from '../assets/logobig.png';
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here (e.g., validation, API call)
     console.log("Form submitted:", {
-      firstName,
-      lastName,
       email,
       password,
-      confirmPassword,
     });
   };
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit} className="formandshit">
-        <h1 className="titleRegister">Create an Account</h1>
-        <h2 className="Belowtitle">
-          Dive in the MindScape therapeutic experience.
-        </h2>
-
-        <div className="nameRow">
-          <input
-            type="text"
-            placeholder="First Name"
-            className="nameInput"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            className="nameInput"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </div>
+         <div className="containercontent">
+         <div className="header">
+        <img src={together} alt="Together" className="logologin" />
+        <h1 className="titleLogin">Your AI mental wellness buddy.</h1>
+      </div>
+      <form onSubmit={handleSubmit} className="form">
 
         <div className="inputContainer">
           <input
@@ -62,7 +41,6 @@ function Signup() {
 
         <div className="inputContainer">
           <div className="passwordInputContainer">
-            
             <input
               type={isPasswordVisible ? "text" : "password"}
               placeholder="Password"
@@ -79,24 +57,18 @@ function Signup() {
           </div>
         </div>
 
-        <div className="inputContainer">
-          <input
-            type={isPasswordVisible ? "text" : "password"}
-            placeholder="Confirm Password"
-            className="passwordInput"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit" className="register">
-          REGISTER
+        <button type="submit" className="login">
+          LOGIN
         </button>
+        <div className="registerText">
+          <p>Don't have an account?</p>
+          
+          <Link to="/register" className="registerButton">Register</Link>
+        </div>
       </form>
+      </div>
     </div>
   );
 }
 
-
-export default Signup;
+export default Login;

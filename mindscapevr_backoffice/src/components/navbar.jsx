@@ -3,6 +3,7 @@ import './Navbar.css';
 import whiteLogo from '../assets/whitelogo.png';
 import fullyWhite from '../assets/fullywhite.png';
 import 'material-symbols';
+import { Link } from 'react-router-dom';
 
 function Navbar({ bgColor }) 
 {
@@ -18,8 +19,9 @@ function Navbar({ bgColor })
     <div className="spacer"></div> {/* Spacer for distance */}
     <img src={fullyWhite} alt="Fully White" className="fully-white" width="343" height="45.5" />
     <div className="left-buttons">
-        <button className="navbar-button" onClick={handleRegisterClick}>Register</button>
-        <button className="navbar-button">Login<span class="material-symbols-outlined">Open_In_New</span></button>
+         <Link to="/register" className="navbar-button">Register</Link>
+         <Link to="/login" className="navbar-button">Login</Link>
+        
         
        
       </div>

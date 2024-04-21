@@ -1,0 +1,118 @@
+/* General container styles */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #242527;
+    padding: 20px;
+    flex-direction: column;
+  }
+  .containercontent {
+    margin-bottom: 100px;
+  }
+  .header {
+    text-align: center;
+
+  }
+  
+  .logologin {
+    width: 250px; /* Adjust size as needed */
+    height: 250px;
+    margin-bottom: -20px; /* Adjust size as needed */
+  }
+  
+
+  /* Title styles */
+  .titleLogin {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center; 
+  }
+  
+  /* Input container styles */
+  .inputContainer {
+    margin-bottom: 15px;
+  }
+  
+  /* Email input styles */
+  .emailInput {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 50px;
+    border-width: 3px;
+    border-color: #fff;
+    background-color: #242527;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 15px;
+  }
+  
+  /* Password input styles */
+  .passwordInputContainer {
+    position: relative;
+  }
+  
+  .passwordInput {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 50px;
+    border-width: 3px;
+    border-color: #fff;
+    background-color: #242527;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 15px;
+  }
+  
+  /* Password icon styles */
+  .passwordIcon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  /* Submit button styles */
+  .login {
+    width: 106%;
+    height: 58px;
+    background-color: #b19cd9;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    color: #FFB08E;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+  }
+  .registerText {
+    text-align: center;
+  }
+  
+  .registerText p {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .registerButton {
+    margin-top: 10px;
+    background-color: transparent;
+    border: none;
+    color: #FFB08E;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .registerButton:hover {
+    text-decoration: none;
+  }

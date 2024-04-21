@@ -1,0 +1,63 @@
+
+.dashnavbar {
+    position: fixed; /* Set navbar position to fixed */
+    top: 0; /* Position it at the top of the viewport */
+    left: 0; /* Position it at the left of the viewport */
+    width: 100%; /* Set the width to span the entire viewport */
+    height: 80px; /* Ensure the navbar spans the entire width */
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    z-index: 20;
+    background-color: #FFB08E;
+    
+    
+  }
+
+  
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+.dashnavbar-links {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 60px;
+  }
+
+
+  .dash-link {
+    
+    background-color: transparent;
+    border: none;
+    color: #FFF;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 20px;/* Set display to inline-block */
+    position: relative;
+    text-decoration: none;
+    
+  }
+  
+
+  .main-container {
+    background-color: #FFB08E; /* FFB08E color */
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .inner-container {
+    background-color: #FFD3B5; /* FFD3B5 color */
+    padding: 20px; /* Padding from all sides */
+    border-radius: 41px; /* Border radius */
+  }
+  
