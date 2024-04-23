@@ -4,7 +4,7 @@ import NavbarDash from '../components/dashboardnav';
 const Dash = () => {
   return (
     <div>
-    <NavbarDash />
+    
     <Dashboard />
     </div>
   );

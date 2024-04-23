@@ -1,76 +1,215 @@
-.main-container {
-    background-color: #FFB08E;
-    width: 100vw; /* Use vw for viewport width */
-    height: 100vh; /* Use vh for viewport height */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center inner container vertically */
-  }
-  
+/* dashboard.css */
 
-  
-.whatthefuck {
-    background-color: #FFD3B5;
-    padding: 20px;
-    border-radius: 20px;
-    width: 90%; /* Adjust width to cover entire page with padding */
-    height: 80%; /* Adjust height to cover entire viewport with padding */
-    margin: 10px;
-    margin-bottom: -50px;
-  }
-  .dashboard-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .dashboard-table th,
-.dashboard-table td {
-  font-family: 'Montserrat', sans-serif; /* Use Montserrat font family */
-  font-size: 16px;
-  
-  padding: 10px; /* Ensure both th and td have the same padding */
-  color: #fff;
+body {
+  margin: 0;
+
+  font-family: "Montserrat", sans-serif;
+  overflow: hidden;
 }
+
+.admin-dashboard {
+  padding: 30px;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  background-color: #ffb08e;
+}
+
+.logo-column {
+  flex: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+}
+
+.sidebar-button {
+  background-color: #ffb08e;
+  color: white; /* Text color for buttons */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  margin-bottom: 10px;
+
+  transition: background-color 0.5s ease-in-out; /* Add spacing between buttons */
+}
+
+.sidebar-button:hover {
+  background-color: #b19cd9; /* Background color on hover */
+}
+
+.sidebartext {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+
+  font-size: 20px;
+  color: white;
+}
+
+.logo-smalli {
+  width: 110px;
+  height: 110px;
+  margin-right: 40px;
+}
+
+.rectangle-column {
+  flex: 80%;
+  background-color: #ffd3b5;
+  border-radius: 18px;
+  height: 60px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Divide the column into 3 equal parts */
+  align-items: center;
+}
+
+.rectangle-column h1 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+}
+
+.dashboard-users {
+  grid-column: 2; /* Make "Dashboard - Users" take up available space */
+  text-align: center;
+}
+
+.username {
+  grid-column: 3;
+  text-align: right;
+  font-size: 24px;
+  color: #b19cd9;
+}
+
+.row-dash {
+  display: flex;
+}
+
+.choices-dash {
+  flex: 15%;
+}
+
+.rectangle-dash {
+  width: 100%;
+  height: 100%; /* Adjust the height as needed */
+  background-color: #ffd3b5;
+  border-radius: 18px;
+}
+
+.testingfirstsection {
+  display: flex;
+  flex-direction: row;
+  height: 15%;
+  margin-bottom: -10px;
+  /* Adjust as needed */
+}
+.testingsecondsection {
+  display: flex;
+  flex-direction: row;
+  height: 85%;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+.sidebar-section {
+  flex: 15%;
+  display: flex;
+  flex-direction: column;
+  height: 87%;
+  padding: 20px;
+  background-color: #ffd3b5;
+  border-radius: 18px;
+  margin-right: 40px;
+}
+
+.dash-section {
+  flex: 85%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffd3b5;
+  padding: 20px;
+  border-radius: 18px;
+  height: 87%;
+}
+
+.row-one {
+  display: flex; /* Make elements in this row horizontal */
+  height: 25%;
+  justify-content: space-between; /* Add space between elements */
+}
+
+.row-two {
+  flex: 1;
+  /* Take up remaining space (75%) */
+}
+
+.rectangle {
+  background-color: #ffb08e;
+  padding: 20px;
+  border-radius: 18px;
+  flex: 1; /* Make rectangles take up equal space */
+  margin: 10px; /* Add space between rectangles */
+}
+
+.dashboard-table {
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
 .dashboard-table th {
-    background-color: #b19cd9;
-    font-weight: 900;
-  }
-  
-  .dashboard-table td {
-    background-color: #ffb08e;
-    font-weight: 500;
-  }
-  .dashboard-table th,
+  font-family: "Montserrat", sans-serif; /* Use Montserrat font family */
+  font-size: 16px;
+  font-weight: 900;
+  background-color: #b19cd9;
+  padding: 10px;
+  color: #fff;
+  margin-top: 10px;
+}
+.dashboard-table td {
+  font-family: "Montserrat", sans-serif; /* Use Montserrat font family */
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #ffb08e;
+  padding: 10px;
+  color: #fff;
+  margin-bottom: 10px;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.dashboard-table th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.dashboard-table th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.dashboard-table td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.dashboard-table td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.dashboard-table th,
 .dashboard-table td {
   text-align: left; /* Align content to the left */
 }
-  
-  .dashboard-table th:first-child {
-   
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
-  }
-  
-  .dashboard-table th:last-child {
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-  }
-  
 
-  .dashboard-table td:first-child {
-   
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
-  }
-  
-  .dashboard-table td:last-child {
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-  }
+.seperator {
+  margin: 10px 0;
+}
 
-  .dashboard-table tr:not(:first-child) {
-    margin-top: 10px; 
+.dashboard-table tbody tr:hover {
+  /* Hover color */
+  td {
+    background-color: #b19cd9; /* Text weight on hover */
+    
   }
-  .sep {
-    margin-top: 10px;
-  }
+}
