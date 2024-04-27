@@ -7,6 +7,7 @@ import Register from './components/signup'; // Import your Register component
 import Home from './homes/home'; // Import the wrapper component
 import Login from './components/signin'; // Import your Login component
 import Dashy from './homes/dash'; // Import your Dashboard component
+import Dashmed from './components/dashmeditation';
 function App() {
   const [count, setCount] = useState(0)
   const [bgColor, setBgColor] = useState('#ffb08e');
@@ -37,7 +38,9 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashy />} />
+      <Route path="/dashboard/users" element={<Dashy />} />
+      <Route path="/dashboard/meditations" element={<Dashmed />} />
+      
       </Routes>
   </div>
   </BrowserRouter>

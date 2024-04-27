@@ -35,6 +35,24 @@ body {
   transition: background-color 0.5s ease-in-out; /* Add spacing between buttons */
 }
 
+.delete-button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  align-items: left;
+  background-color: transparent;
+  color: red; /* Text color for buttons */
+  padding: 5px 15px; /* Adjust padding as needed */
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+
+  transition: 1s ease-in-out; /* Add spacing between buttons */
+}
+
+.delete-button:hover {
+  color: white;
+  background-color: red; /* Background color on hover */
+}
 .sidebar-button:hover {
   background-color: #b19cd9; /* Background color on hover */
 }
@@ -130,6 +148,7 @@ body {
   padding: 20px;
   border-radius: 18px;
   height: 87%;
+  overflow-y: auto;
 }
 
 .row-one {
@@ -213,3 +232,42 @@ body {
     
   }
 }
+
+
+/* Add these styles to your dashboard.css file */
+
+.pagination {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination button {
+  border: none;
+  padding: 8px 16px;
+  margin: 0 4px;
+  background-color: #b19cd9;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  border-radius: 18px;
+}
+
+.pagination button:hover {
+  background-color: #8a6db9;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  color: #666;
+  cursor: not-allowed;
+}
+
+

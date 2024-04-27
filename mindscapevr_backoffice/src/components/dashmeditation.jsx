@@ -4,21 +4,24 @@ import { Link } from "react-router-dom";
 import logobig from "../assets/logobig.png"; // Import the image
 import { motion } from "framer-motion";
 import axios from "axios";
+import CustomSnackbar from "./CustomSnackbar";
+import theme from "./theme";
+import { ThemeProvider } from "@mui/material/styles";
 
-function Dashboard() {
-  const [users, setUsers] = useState([]);
+function DashMeditations() {
+  const [meds, setMeds] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 6; // Number of rows per page
+  const rowsPerPage = 9; // Number of rows per page
   // Fetch users data when component mounts
   useEffect(() => {
     // Define async function to fetch users
     const fetchUsers = async () => {
       try {
-        console.log("Fetching users...")
+        console.log("Fetching Meditations...");
         // Make GET request to fetch users
-        const response = await axios.get("http://localhost:6969/users");
+        const response = await axios.get("http://localhost:6969/video");
         // Set users state with data from response
-        setUsers(response.data.list);
+        setMeds(response.data);
       } catch (error) {
         // Handle errors
         console.error("Error fetching users:", error);
@@ -29,13 +32,12 @@ function Dashboard() {
     fetchUsers();
   }, []); // Empty dependency array to only run the effect once
 
-
   /////////////////////pagination part
   const indexOfFirstUser = (currentPage - 1) * rowsPerPage;
   // Calculate index of the last user on the current page
   const indexOfLastUser = currentPage * rowsPerPage;
   // Slice the array of users to get users for the current page
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = meds.slice(indexOfFirstUser, indexOfLastUser);
 
   // Function to handle pagination navigation
   const handlePageChange = (pageNumber) => {
@@ -43,8 +45,36 @@ function Dashboard() {
   };
 
   // Calculate total number of pages
-  const totalPages = Math.ceil(users.length / rowsPerPage);
+  const totalPages = Math.ceil(meds.length / rowsPerPage);
   ///////////////////////////////////////////
+  const handleDelete = async (id) => {
+    try {
+      // Make a DELETE request to the backend endpoint
+      await axios.delete(`http://localhost:6969/video/${id}`);
+      // If successful, remove the deleted video from the state or reload the data
+      // For example:
+      // setVideos(videos.filter(video => video._id !== id));
+      // Or, if you want to reload the data:
+      // fetchData();
+      handleClick();
+    } catch (error) {
+      console.error("Error deleting video:", error);
+      // Handle errors, if any
+    }
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
 
   return (
@@ -67,7 +97,7 @@ function Dashboard() {
           />
         </div>
         <div className="rectangle-column">
-          <h1 className="dashboard-users">Dashboard - Users</h1>
+          <h1 className="dashboard-users">Dashboard - Meditations</h1>
           <h1 className="username">Hajer Bekir</h1>
         </div>
       </div>
@@ -76,46 +106,66 @@ function Dashboard() {
           <button class="sidebar-button">
             <div className="sidebartext">Users</div>
           </button>
+
           <button class="sidebar-button">
             <div className="sidebartext">Meditations</div>
           </button>
+
           <button class="sidebar-button">
             <div className="sidebartext">Goals</div>
           </button>
         </div>
         <div className="dash-section">
-         
+          {/*
           <div class="row-one">
             <div class="rectangle"></div>
             <div class="rectangle"></div>
             <div class="rectangle"></div>
           </div>
-          
+          */}
           <div class="row-two">
+      <CustomSnackbar
+        open={open}
+        message="Meditation deleted successfully!"
+        onClose={handleClose}
+      />
+         
+
             <table class="dashboard-table">
               <thead>
                 <tr>
-                  <th>Last Name</th>
-                  <th>First Name</th>
-                  <th>Email</th>
-                  <th>Phone Number</th>
-                  
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Length (mins)</th>
+                  <th>Category</th>
+                  <th>Plays</th>
+                  <th>Actions</th>
                 </tr>
                 <div className="seperator"></div>
-
               </thead>
               <tbody>
-              {currentUsers.map((user, index) => (
+                {currentUsers.map((user, index) => (
                   <React.Fragment key={user._id}>
                     <motion.tr
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }} // Add delay based on index
                     >
-                      <td>{user.fname}</td>
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td>{user.phone}</td>
+                      <td>{user.title}</td>
+                      <td>
+                        {user.description && user.description.length > 20
+                          ? `${user.description.substring(0, 20)}...`
+                          : user.description}
+                      </td>
+                      <td>{user.timer}</td>
+                      <td>{user.subCategory}</td>
+                      <td>{user.numPlays}</td>
+                      <td>
+                        {" "}
+                        <button onClick={() => handleDelete(user._id)} class="delete-button">
+                          Delete
+                        </button>
+                      </td>
                     </motion.tr>
                     {index !== currentUsers.length - 1 && (
                       <div className="seperator"></div>
@@ -157,4 +207,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashMeditations;
