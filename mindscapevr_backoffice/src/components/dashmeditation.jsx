@@ -5,13 +5,13 @@ import logobig from "../assets/logobig.png"; // Import the image
 import { motion } from "framer-motion";
 import axios from "axios";
 import CustomSnackbar from "./CustomSnackbar";
-import theme from "./theme";
-import { ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from 'react-router-dom';
 
 function DashMeditations() {
   const [meds, setMeds] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   const rowsPerPage = 9; // Number of rows per page
 
@@ -91,6 +91,20 @@ function DashMeditations() {
     }
   };
 
+  const navigateToUsers = () => {
+    navigate('/dashboard/users');
+  };
+
+  const navigateToMeditations = () => {
+    navigate('/dashboard/meditations');
+  };
+
+
+  const handleModify = async (meditation) => {
+    // Navigate to ModifyMeditation page and pass the clicked meditation data as state
+    navigate(`/dashboard/meditations/modify/${meditation._id}`, { state: { meditation } });
+  };
+
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -130,13 +144,12 @@ function DashMeditations() {
       </div>
       <div className="testingsecondsection">
         <div className="sidebar-section">
-          <button className="sidebar-button">
-            <div className="sidebartext">Users</div>
-          </button>
-
-          <button className="sidebar-button">
-            <div className="sidebartext">Meditations</div>
-          </button>
+        <button className="sidebar-button" onClick={navigateToUsers}>
+        <div className="sidebartext">Users</div>
+      </button>
+      <button className="sidebar-button" onClick={navigateToMeditations}>
+        <div className="sidebartext">Meditations</div>
+      </button>
 
           <button className="sidebar-button">
             <div className="sidebartext">Goals</div>
@@ -165,13 +178,13 @@ function DashMeditations() {
                   <th>Category</th>
                   <th>Subcategory</th>
                   <th>Plays</th>
-                  <th>Actions</th>
+                  <th colSpan={2}>Actions</th>
+                  
                 </tr>
                 <div className="seperator"></div>
               </thead>
               <tbody>
-                
-              {loading ? (
+                {loading ? (
                   <tr>
                     <td colSpan="7">Loading...</td>
                   </tr>
@@ -209,6 +222,15 @@ function DashMeditations() {
                             Delete
                           </button>
                         </td>
+                        <td>
+                          
+                          <button
+                            onClick={() => handleModify(user)} // Assuming you have a handleModify function
+                            className="modify-button"
+                          >
+                            Modify
+                          </button>
+                        </td>
                       </motion.tr>
                       {index !== currentUsers.length - 1 && (
                         <div className="seperator"></div>
@@ -216,7 +238,6 @@ function DashMeditations() {
                     </React.Fragment>
                   ))
                 )}
-             
               </tbody>
             </table>
             <div className="pagination">

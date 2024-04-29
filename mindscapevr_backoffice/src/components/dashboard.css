@@ -57,7 +57,7 @@ body {
   background-color: #b19cd9; /* Background color on hover */
 }
 
-.delete-button {
+.delete-button, .modify-button {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   align-items: left;
@@ -69,6 +69,15 @@ body {
   cursor: pointer; /* Change cursor to pointer on hover */
 
   transition: 1s ease-in-out; /* Add spacing between buttons */
+}
+
+.modify-button {
+  color: green; /* Text color for modify button */
+}
+
+.modify-button:hover {
+  color: white;
+  background-color: green; /* Background color on hover */
 }
 
 .delete-button:hover {

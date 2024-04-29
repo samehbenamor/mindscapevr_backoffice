@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import logobig from "../assets/logobig.png"; // Import the image
 import { motion } from "framer-motion";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 6; // Number of rows per page
+  const navigate = useNavigate()
+
   // Fetch users data when component mounts
   useEffect(() => {
     // Define async function to fetch users
@@ -46,6 +49,14 @@ function Dashboard() {
   const totalPages = Math.ceil(users.length / rowsPerPage);
   ///////////////////////////////////////////
 
+  const navigateToUsers = () => {
+    navigate('/dashboard/users');
+  };
+
+  const navigateToMeditations = () => {
+    navigate('/dashboard/meditations');
+  };
+
 
   return (
     <div className="admin-dashboard">
@@ -73,12 +84,12 @@ function Dashboard() {
       </div>
       <div className="testingsecondsection">
         <div className="sidebar-section">
-          <button class="sidebar-button">
-            <div className="sidebartext">Users</div>
-          </button>
-          <button class="sidebar-button">
-            <div className="sidebartext">Meditations</div>
-          </button>
+        <button className="sidebar-button" onClick={navigateToUsers}>
+        <div className="sidebartext">Users</div>
+      </button>
+      <button className="sidebar-button" onClick={navigateToMeditations}>
+        <div className="sidebartext">Meditations</div>
+      </button>
           <button class="sidebar-button">
             <div className="sidebartext">Goals</div>
           </button>
