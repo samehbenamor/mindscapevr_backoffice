@@ -8,31 +8,57 @@ import CustomSnackbar from "./CustomSnackbar";
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
 
-
-
 function DashMeditations() {
   const [meds, setMeds] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+
   const rowsPerPage = 9; // Number of rows per page
+
   // Fetch users data when component mounts
   useEffect(() => {
-    // Define async function to fetch users
-    const fetchUsers = async () => {
+    // Define async function to fetch users and their corresponding subcategories
+    const fetchData = async () => {
       try {
         console.log("Fetching Meditations...");
         // Make GET request to fetch users
-        const response = await axios.get("http://localhost:6969/video");
+        const responseMeds = await axios.get("http://localhost:6969/video");
         // Set users state with data from response
-        setMeds(response.data);
+        setMeds(responseMeds.data);
+
+        // Fetch subcategories for each user
+        const subcategoryPromises = responseMeds.data.map(async (user) => {
+          if (user.subCategory) {
+            try {
+              const responseSub = await axios.get(
+                `http://localhost:6969/subcate/${user.subCategory}`
+              );
+              // Update user with subcategory data
+              user.subCategoryData = responseSub.data;
+            } catch (error) {
+              console.error("Error fetching subcategory:", error);
+              user.subCategoryData = null;
+            }
+          }
+          return user;
+        });
+
+        // Wait for all subcategory requests to complete
+        const updatedMeds = await Promise.all(subcategoryPromises);
+        // Set the updated users state
+        setMeds(updatedMeds);
+        setLoading(false);
+
+        // Set loading state to false
       } catch (error) {
         // Handle errors
-        console.error("Error fetching users:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    // Call fetchUsers function
-    fetchUsers();
-  }, []); // Empty dependency array to only run the effect once
+    // Call fetchData function
+    fetchData();
+  }, []);
 
   /////////////////////pagination part
   const indexOfFirstUser = (currentPage - 1) * rowsPerPage;
@@ -78,8 +104,6 @@ function DashMeditations() {
     setOpen(false);
   };
 
-  
-
   return (
     <div className="admin-dashboard">
       <div className="testingfirstsection">
@@ -106,78 +130,93 @@ function DashMeditations() {
       </div>
       <div className="testingsecondsection">
         <div className="sidebar-section">
-          <button class="sidebar-button">
+          <button className="sidebar-button">
             <div className="sidebartext">Users</div>
           </button>
 
-          <button class="sidebar-button">
+          <button className="sidebar-button">
             <div className="sidebartext">Meditations</div>
           </button>
 
-          <button class="sidebar-button">
+          <button className="sidebar-button">
             <div className="sidebartext">Goals</div>
           </button>
         </div>
         <div className="dash-section">
-          {/*
-          <div class="row-one">
-            <div class="rectangle"></div>
-            <div class="rectangle"></div>
-            <div class="rectangle"></div>
-          </div>
-          */}
-          <div class="row-two">
-      <CustomSnackbar
-        open={open}
-        message="Meditation deleted successfully!"
-        onClose={handleClose}
-      />
-          <div class="abovetable">
-          <button class="meditation-add-button">
-            <div className="sidebartext">Add Meditation</div>
-          </button>
-          </div>
-            <table class="dashboard-table">
+          <div className="row-two">
+            <CustomSnackbar
+              open={open}
+              message="Meditation deleted successfully!"
+              onClose={handleClose}
+            />
+            <div className="abovetable">
+              <Link to="/dashboard/meditations/create">
+                <button className="meditation-add-button">
+                  <div className="sidebartext">Add Meditation</div>
+                </button>
+              </Link>
+            </div>
+            <table className="dashboard-table">
               <thead>
                 <tr>
                   <th>Title</th>
                   <th>Description</th>
                   <th>Length (mins)</th>
                   <th>Category</th>
+                  <th>Subcategory</th>
                   <th>Plays</th>
                   <th>Actions</th>
                 </tr>
                 <div className="seperator"></div>
               </thead>
               <tbody>
-                {currentUsers.map((user, index) => (
-                  <React.Fragment key={user._id}>
-                    <motion.tr
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }} // Add delay based on index
-                    >
-                      <td>{user.title}</td>
-                      <td>
-                        {user.description && user.description.length > 20
-                          ? `${user.description.substring(0, 20)}...`
-                          : user.description}
-                      </td>
-                      <td>{user.timer}</td>
-                      <td>{user.subCategory}</td>
-                      <td>{user.numPlays}</td>
-                      <td>
-                        {" "}
-                        <button onClick={() => handleDelete(user._id)} class="delete-button">
-                          Delete
-                        </button>
-                      </td>
-                    </motion.tr>
-                    {index !== currentUsers.length - 1 && (
-                      <div className="seperator"></div>
-                    )}
-                  </React.Fragment>
-                ))}
+                
+              {loading ? (
+                  <tr>
+                    <td colSpan="7">Loading...</td>
+                  </tr>
+                ) : (
+                  currentUsers.map((user, index) => (
+                    <React.Fragment key={user._id}>
+                      <motion.tr
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }} // Add delay based on index
+                      >
+                        <td>{user.title}</td>
+                        <td>
+                          {user.description && user.description.length > 20
+                            ? `${user.description.substring(0, 20)}...`
+                            : user.description}
+                        </td>
+                        <td>{user.timer}</td>
+                        <td>
+                          {user.subCategoryData
+                            ? user.subCategoryData.category || "Unknown"
+                            : "Unknown"}
+                        </td>
+                        <td>
+                          {user.subCategoryData
+                            ? user.subCategoryData.name || "Unknown"
+                            : "Unknown"}
+                        </td>
+                        <td>{user.numPlays}</td>
+                        <td>
+                          <button
+                            onClick={() => handleDelete(user._id)}
+                            className="delete-button"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </motion.tr>
+                      {index !== currentUsers.length - 1 && (
+                        <div className="seperator"></div>
+                      )}
+                    </React.Fragment>
+                  ))
+                )}
+             
               </tbody>
             </table>
             <div className="pagination">
