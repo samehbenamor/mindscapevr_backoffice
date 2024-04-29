@@ -35,6 +35,28 @@ body {
   transition: background-color 0.5s ease-in-out; /* Add spacing between buttons */
 }
 
+
+.abovetable {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */ /* Add some spacing */
+}
+
+
+.meditation-add-button {
+  background-color: #ffb08e;
+  color: white; /* Text color for buttons */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.5s ease-in-out;
+}
+
+.meditation-add-button:hover {
+  background-color: #b19cd9; /* Background color on hover */
+}
+
 .delete-button {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;

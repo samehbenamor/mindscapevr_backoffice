@@ -8,6 +8,8 @@ import CustomSnackbar from "./CustomSnackbar";
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
 
+
+
 function DashMeditations() {
   const [meds, setMeds] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,6 +78,7 @@ function DashMeditations() {
     setOpen(false);
   };
 
+  
 
   return (
     <div className="admin-dashboard">
@@ -129,8 +132,11 @@ function DashMeditations() {
         message="Meditation deleted successfully!"
         onClose={handleClose}
       />
-         
-
+          <div class="abovetable">
+          <button class="meditation-add-button">
+            <div className="sidebartext">Add Meditation</div>
+          </button>
+          </div>
             <table class="dashboard-table">
               <thead>
                 <tr>
