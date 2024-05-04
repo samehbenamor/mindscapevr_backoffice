@@ -195,10 +195,17 @@ body {
 
 .rectangle {
   background-color: #ffb08e;
-  padding: 20px;
+  
   border-radius: 18px;
   flex: 1; /* Make rectangles take up equal space */
-  margin: 10px; /* Add space between rectangles */
+   /* Add space between rectangles */
+}
+.rectangle2 {
+  background-color: #ffb08e;
+  padding-top: 10px;
+  border-radius: 18px;
+  flex: 1; /* Make rectangles take up equal space */
+  margin-left: 10px;/* Add space between rectangles */
 }
 
 .dashboard-table {
@@ -269,7 +276,7 @@ body {
 
 .pagination {
   position: absolute;
-  bottom: 50px;
+  bottom: 45px;
   left: 50%;
  
   display: flex;

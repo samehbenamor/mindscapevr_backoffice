@@ -6,6 +6,17 @@ const Home = () => {
     const [bgColor, setBgColor] = useState('#ffb08e');
   //const navigate = useNavigate();
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Retrieve user session variables if they exist
+    const userData = localStorage.getItem('UserInfo');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+    console.log("User data found in session storage:", user);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -26,7 +37,7 @@ const Home = () => {
   }, []);
   return (
     <div>
-    <Navbar bgColor={bgColor} />
+    <Navbar user={user} bgColor={bgColor} />
     <LandingPage />
     <GetApp />
     </div>

@@ -66,7 +66,7 @@
   font-size: 24px;
   font-weight: 300; /* Set font weight to light */
   text-align: justify; /* Justify text alignment */
-  text-align-last: justify; /* Justify the last line */
+  text-align-last: auto; /* Justify the last line */
   line-height: 1.5;
   letter-spacing: 0.03em; /* Set line height for better readability *//* Stretch letters */
   margin-top: 30px; /* Add some margin at the top */

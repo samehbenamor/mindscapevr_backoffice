@@ -13,7 +13,7 @@ function DashMeditations() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
 
-  const rowsPerPage = 9; // Number of rows per page
+  const rowsPerPage = 7; // Number of rows per page
 
   // Fetch users data when component mounts
   useEffect(() => {
@@ -85,6 +85,12 @@ function DashMeditations() {
       // Or, if you want to reload the data:
       // fetchData();
       handleClick();
+      setTimeout(() => {
+        window.location.reload();
+
+        // Put your code here that you want to execute after waiting for 2 seconds
+      }, 2000);
+
     } catch (error) {
       console.error("Error deleting video:", error);
       // Handle errors, if any
@@ -99,6 +105,19 @@ function DashMeditations() {
     navigate('/dashboard/meditations');
   };
 
+  ////////Session part////////
+  const [userSession, setUser] = useState(null);
+
+  useEffect(() => {
+    // Check if user info exists in session storage
+    const userData = localStorage.getItem('UserInfo');
+    if (userData) {
+      console.log("User data found in Dashboard session storage:", userData);
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+  console.log("From dashboard user:", userSession);
+  ///////////////////////////
 
   const handleModify = async (meditation) => {
     // Navigate to ModifyMeditation page and pass the clicked meditation data as state
@@ -137,10 +156,12 @@ function DashMeditations() {
             }} // Define continuous animation
           />
         </div>
-        <div className="rectangle-column">
-          <h1 className="dashboard-users">Dashboard - Meditations</h1>
-          <h1 className="username">Hajer Bekir</h1>
-        </div>
+        {userSession ? (
+  <div className="rectangle-column">
+    <h1 className="dashboard-users">Dashboard - Meditations</h1>
+    <h1 className="username">{userSession.name}</h1>
+  </div>
+) : null}
       </div>
       <div className="testingsecondsection">
         <div className="sidebar-section">

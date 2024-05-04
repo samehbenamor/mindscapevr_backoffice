@@ -2,18 +2,18 @@ import React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-const CustomSnackbar = ({ open, message, onClose }) => {
+const MeditationAddedSnackbar = ({ open, message, onClose }) => {
   return (
     <Snackbar
       open={open}
-      autoHideDuration={2000} // Duration in milliseconds
+      autoHideDuration={3000} // Duration in milliseconds
       onClose={onClose}
-      anchorOrigin={{ vertical: "center", horizontal: "right" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
     >
       <MuiAlert
         elevation={6}
         variant="filled"
-        severity="error" // Change severity as needed (error, warning, info, success)
+        severity="success" // Change severity as needed (error, warning, info, success)
         onClose={onClose}
       >
         {message}
@@ -22,4 +22,4 @@ const CustomSnackbar = ({ open, message, onClose }) => {
   );
 };
 
-export default CustomSnackbar;
+export default MeditationAddedSnackbar;

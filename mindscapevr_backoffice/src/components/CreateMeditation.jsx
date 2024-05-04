@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"; // Add import statement for 
 import { Link } from "react-router-dom";
 import "./CreateMeditation.css";
 import axios from "axios";
+import MeditationAddedSnackbar from "./MeditationAddedSnackbar";
 
 function CreateMeditation() {
   const [title, setTitle] = useState("");
@@ -37,6 +38,7 @@ function CreateMeditation() {
       setImage("");
       setVideo("");
       setSelectedSubcategory("");
+      handleClick(); // Open snackbar
       //setRedirectToDashboard(true);
 
     } catch (error) {
@@ -61,6 +63,19 @@ function CreateMeditation() {
 
     fetchSubcategories();
   }, [category]);
+
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
 
   return (
     <div className="containerMeditation">
@@ -149,6 +164,11 @@ function CreateMeditation() {
           Go back
         </Link>
       </form>
+      <MeditationAddedSnackbar
+              open={open}
+              message="Meditation added successfully!"
+              onClose={handleClose}
+            />
     </div>
   );
 }
