@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./CreateMeditation.css";
 import axios from "axios";
 import MeditationAddedSnackbar from "./MeditationAddedSnackbar";
+import { Toaster, toast } from 'react-hot-toast'; // Import Toaster and toast
 
 function CreateMeditation() {
   const [title, setTitle] = useState("");
@@ -17,6 +18,20 @@ function CreateMeditation() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!title || !description || !timer || !image || !video || !selectedSubcategory) {
+      handleClick("error", "Please fill in all required fields.");
+      return;
+    }
+    // Check if title contains only alphabetical characters
+    if (!/^[a-zA-Z ]+$/.test(title)) {
+      handleClick("error", "Title should contain only alphabetical characters.");
+      return;
+    }
+    // Check if timer is numerical
+    if (isNaN(timer)) {
+      handleClick("error", "Timer should be a numerical value.");
+      return;
+    }
     try {
       const requestBody = {
         title,
@@ -38,12 +53,21 @@ function CreateMeditation() {
       setImage("");
       setVideo("");
       setSelectedSubcategory("");
-      handleClick(); // Open snackbar
-      //setRedirectToDashboard(true);
+      handleClick("success", "Meditation added successfully!");      //setRedirectToDashboard(true);
 
     } catch (error) {
-      console.error("Error creating meditation:", error);
-    }
+      if (error.response) {
+        // The request was made and the server responded with a status code that falls out of the range of 2xx
+        const errorMessage = error.response.data.message;
+        handleClick("error", errorMessage); // Open error toast with custom message
+      } else if (error.request) {
+        // The request was made but no response was received
+        handleClick("error", "No response from server. Please try again later.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        handleClick("error", "An unexpected error occurred. Please try again later.");
+      }
+      console.error("Error creating meditation:", error);    }
   };
   /*
   if (redirectToDashboard) {
@@ -65,10 +89,19 @@ function CreateMeditation() {
   }, [category]);
 
   const [open, setOpen] = useState(false);
-  const handleClick = () => {
+  /*const handleClick = () => {
     setOpen(true);
-  };
+  };*/
 
+  const handleClick = (type, message) => {
+    toast[type](message, { // Set position to top right
+      style: {
+        backgroundColor: '#333', // Dark mode background color
+        color: '#fff', // Dark mode text color
+      },
+    }); 
+    //setOpen(true);// Display toast based on type
+  };
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -79,6 +112,7 @@ function CreateMeditation() {
 
   return (
     <div className="containerMeditation">
+          <Toaster />
        <form onSubmit={handleSubmit} className="form">
         <h1 className="title">Create a Meditation</h1>
         <h2 className="subTitle">Create an immersive meditation.</h2>
@@ -89,7 +123,7 @@ function CreateMeditation() {
             className="input"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            required
+            
           />
         </div>
         <div className="inputContainer">
@@ -99,7 +133,7 @@ function CreateMeditation() {
             className="input descriptionInput"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            required
+            
           />
         </div>
         <div className="inputContainer">
@@ -110,7 +144,7 @@ function CreateMeditation() {
             value={timer}
             onChange={(e) => setTimer(e.target.value)}
             pattern="\d*"
-            required
+            
           />
         </div>
         <div className="inputContainer">
@@ -120,7 +154,7 @@ function CreateMeditation() {
             className="input"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-            required
+            
           />
         </div>
         <div className="inputContainer">
@@ -130,7 +164,7 @@ function CreateMeditation() {
             className="input"
             value={video}
             onChange={(e) => setVideo(e.target.value)}
-            required
+            
           />
         </div>
         <div className="inputContainer">
@@ -138,7 +172,7 @@ function CreateMeditation() {
             className="input"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            required
+            
           >
             <option value="Meditation">Meditation</option>
             <option value="Sleep">Sleep</option>
@@ -153,7 +187,7 @@ function CreateMeditation() {
             className="input"
             value={selectedSubcategory}
             onChange={(e) => setSelectedSubcategory(e.target.value)}
-            required
+            
           />
         </div>
 

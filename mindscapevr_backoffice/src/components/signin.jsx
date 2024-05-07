@@ -1,59 +1,78 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-
-import together from '../assets/logobig.png';
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { Toaster, toast } from "react-hot-toast"; // Import Toaster and toast
+import together from "../assets/logobig.png";
 import "./signin.css"; // Make sure to import the correct CSS file
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [error, setError] = useState("");
   const navigateToUsers = () => {
-    navigate('/');
+    navigate("/");
+  };
+  const navigateToDashboard = () => {
+    navigate("/dashboard/users");
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:6969/users/login", {
         email,
-        password
+        password,
       });
       const { token } = response.data;
 
       // Save token to local storage
-      localStorage.setItem('token', token);
+      localStorage.setItem("token", token);
 
       // Fetch user profile
-      const profileResponse = await axios.get("http://localhost:6969/users/profile", {
-        headers: {
-          Authorization: token
+      const profileResponse = await axios.get(
+        "http://localhost:6969/users/profile",
+        {
+          headers: {
+            Authorization: token,
+          },
         }
-      });
-      
+      );
+
       const userData = profileResponse.data;
       console.log(userData);
       // Save user data to local storage
-      localStorage.setItem('UserInfo', JSON.stringify(userData));
-      const userTest = localStorage.getItem('UserInfo');
-      console.log("LOOK HERE:", userTest)
+      localStorage.setItem("UserInfo", JSON.stringify(userData));
+      const userTest = localStorage.getItem("UserInfo");
+      console.log("LOOK HERE:", userTest);
       // Redirect or perform any action after successful login
       console.log("Logged in successfully:", userData);
-      navigateToUsers();
-
+      if (userData.isAdmin) {
+        // Redirect to admin dashboard
+        navigateToDashboard();
+      } else {
+        // Redirect to landing page
+        navigateToUsers();
+      }
     } catch (error) {
-      setError("Invalid email or password.");
+      toast.error("Invalid email or password.", {
+        // Set position to top right
+        style: {
+          backgroundColor: "#333", // Dark mode background color
+          color: "#fff", // Dark mode text color
+        },
+      });
+      //setError("Invalid email or password.");
       console.error("Error logging in:", error);
     }
   };
 
   return (
     <div className="container">
+      <Toaster />
       <div className="containercontent">
         <div className="header">
           <img src={together} alt="Together" className="logologin" />
@@ -95,7 +114,9 @@ function Login() {
           {error && <div className="error">{error}</div>}
           <div className="registerText">
             <p>Don't have an account?</p>
-            <Link to="/register" className="registerButton">Register</Link>
+            <Link to="/register" className="registerButton">
+              Register
+            </Link>
           </div>
         </form>
       </div>
